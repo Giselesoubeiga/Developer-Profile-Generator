@@ -18,33 +18,42 @@ const questions = [
         type: "list",
         name: "favColor",
         message: "What's You're Favorate Color ? ",
-        choices: ["green", "blue"]
+        choices: ["green", "blue","pink","red"]
     }
 ];
 
 inquirer.prompt(questions).then(function (response) {
-    console.log(response);
-
+ 
     // use axios to get the data from github
     const mainUrl = "https://api.github.com/users/" + response.username;
     const startUrl = "https://api.github.com/users/" + response.username + "/starred";
 
     //axios call
-    axios.get(mainUrl).then(function (data) {
-        console.log(data);
+    axios.get(mainUrl).then(function (response) {
+         
+        response.data.map(eles=>{
+            console.log(eles)
+        })
+          
+      //  console.log(response.data);
+
+        // pdf.create(generateHTML(els)).toFile('./devportfolio.pdf', function (err, res) {
+        //     if (err) throw (err);
+        // })
+
 
         //build the html page and use electron to pdf
-        var conversion = convertFactory({
-            converterPath: convertFactory.converters.PDF
-        });
+        // var conversion = convertFactory({
+        //     converterPath: convertFactory.converters.PDF
+        // });
 
-        conversion({ html: generateHTML(data) }, function (err, result) {
-            if (err) {
-                return console.error(err);
-            }
+        // conversion({ html: generateHTML(data) }, function (err, result) {
+        //     if (err) {
+        //         return console.error(err);
+        //     }
 
-            result.stream.pipe(fs.createWriteStream('./pdf/generatedPDF.pdf'));
-            conversion.kill(); // necessary if you use the electron-server strategy, see bellow for detai
-        })
+        //     result.stream.pipe(fs.createWriteStream('./pdf/generatedPDF.pdf'));
+        //     conversion.kill(); // necessary if you use the electron-server strategy, see bellow for detai
+        // })
     })
 });

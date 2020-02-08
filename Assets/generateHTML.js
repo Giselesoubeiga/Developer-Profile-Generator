@@ -170,6 +170,13 @@ function generateHTML(data) {
             zoom: .75; 
           } 
          }
-      </style>`;
+      </style>
+      </head>
+      <div>
+        <div class="profil-picture">
+          <img src =
+
+        </div>
+      </div>`
 }
 module.exports = generateHTML;
