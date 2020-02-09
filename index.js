@@ -58,9 +58,9 @@ inquirer.prompt(questions).then(function(response) {
 
       //generate hmtl
       var htmlCode = generateHTML(htmlData);
-      console.log(htmlCode);
+      //console.log(htmlCode);
 
-      //write the page so electrron can intercept the html page... very important.
+      //write the page so electrron can intercept the html page 
       writeFileAsync("./index.html", htmlCode);
 
       //build the pdf using electron ./pdf/generatedPDF.pdf
@@ -71,7 +71,7 @@ inquirer.prompt(questions).then(function(response) {
       conversion({ html: htmlCode }, function(err, result) {
         if (err) throw err;
         result.stream.pipe(fs.createWriteStream('./profile.pdf'));
-        conversion.kill(); // necessary if you use the electron-server strategy, see bellow for details
+        conversion.kill(); 
       });
     });
   });
